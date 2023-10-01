@@ -8,6 +8,7 @@ module.exports = async function (context, eventGridEvent) {
     context.log("Data received " + JSON.stringify(eventGridEvent.data));
     context.log("--------------------------------------------------------------")
     const invoice = common.newInvoice(eventGridEvent.data.custID, eventGridEvent.data.amount);
-    context.log(" returning  "+ JSON.stringify(invoice));
-    return common.createCloudEvent(invoice);
+    const cloudEvent = common.createJsonResponse(invoice);
+    context.log("Return cloud Event ", cloudEvent);
+    context.bindings.outputEvent = cloudEvent;
 };
