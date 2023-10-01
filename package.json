@@ -6,7 +6,10 @@
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
-  "dependencies": {},
+  "dependencies": {
+    "cloudevents": "^8.0.0",
+    "uuid": "^9.0.1"
+  },
   "devDependencies": {
     "azure-functions-core-tools": "^4.x"
   }
