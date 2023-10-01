@@ -4,5 +4,5 @@ console.log("common ", common)
 
 module.exports = async function (context, eventGridEvent) {
     context.log(typeof eventGridEvent);
-    console.log(eventGridEvent.data);
+    console.log("Data received " + JSON.stringify(eventGridEvent.data));
 };
