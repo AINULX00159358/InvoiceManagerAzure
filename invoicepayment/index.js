@@ -1,9 +1,11 @@
 const common = require('../common/common.js')
 
 module.exports = async function (context, eventGridEvent) {
-    console.log(eventGridEvent.data);
+    context.log(JSON.stringify(eventGridEvent));
     let invoice = eventGridEvent.data;
     invoice.amountPaid = invoice.balance;
     let payment = common.payment(invoice, null);
-    context.bindings.outputEvent = payment;  
+    const response = common.createJsonResponse(payment);
+    context.log("Returning ", response);
+    context.bindings.outputEvent = response;
 };
