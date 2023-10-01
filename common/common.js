@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const source = 'urn:event:from:invoice';
 const type = 'invoice';
-const serviceName = process.env.STARTUP;
+const serviceName = process.env.STARTUP || type
 
 const invoiceTemplate = {
        'custID': null,
