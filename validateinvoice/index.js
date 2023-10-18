@@ -1,7 +1,6 @@
 const common = require('../common/common.js')
 
 module.exports = async function (context, eventGridEvent) {
-    context.log("UP TIME ", common.uptime);
     context.log("validation ", JSON.stringify(eventGridEvent));
     let invoice = eventGridEvent.data;
     const response = common.createJsonResponse(common.validate(invoice));

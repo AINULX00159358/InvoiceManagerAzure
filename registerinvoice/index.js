@@ -1,7 +1,6 @@
 const common = require('../common/common.js')
 
 module.exports = async function (context, eventGridEvent) {
-    context.log("UP TIME ", common.uptime);
     context.log("Register Invoice for event", eventGridEvent);
     context.log("Status is ", eventGridEvent.data.status);
     let invoice = common.register(eventGridEvent.data);

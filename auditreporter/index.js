@@ -6,7 +6,6 @@ let avgLatency  = 0;
 
 module.exports = async function (context, eventGridEvent) {
   counter = counter + 1;
-  context.log("UP TIME ", common.uptime);
   let starting = eventGridEvent.data.history["invoice_NEW"];
   let ending = eventGridEvent.data.history["invoice_CLOSED"];
   let latency = ending - starting;
