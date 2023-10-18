@@ -6,6 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const source = 'urn:event:from:invoice';
 const type = 'invoice';
 const serviceName = process.env.STARTUP || type
+const uptime = process.uptime();
 
 const invoiceTemplate = {
        'custID': null,
@@ -116,5 +117,9 @@ function validate(invoice)  {
     return newInvoice
 }
 
+function calculateProcessingDelay(isoDateTime) {
+   return Date.now() - Date.parse(isoDateTime)
+}
+
  
-module.exports = { newInvoice, register, payment, createCloudEventResponse, createJsonResponse, createJsonPayment, validate, createCloudEvent  }
+module.exports = { uptime, calculateProcessingDelay, newInvoice, register, payment, createCloudEventResponse, createJsonResponse, createJsonPayment, validate, createCloudEvent  }
