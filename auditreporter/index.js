@@ -13,5 +13,5 @@ module.exports = async function (context, eventGridEvent) {
   }
   sumlatency = sumlatency + latency
   let avgLatency = sumlatency / counter;
-  context.log(eventGridEvent.data.invoiceID + ", Count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
+  context.log("AUDIT: count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
 };
