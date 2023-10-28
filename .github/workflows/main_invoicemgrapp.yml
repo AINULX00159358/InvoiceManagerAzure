@@ -33,7 +33,7 @@ jobs:
           npm run build --if-present
           npm run test --if-present
           echo "----------Publish Profile------------"
-          echo ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6BC005118694FC380C6BD36107351C2 }}
+          echo '${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F6BC005118694FC380C6BD36107351C2 }}'
           echo "-------------------------------------"
           popd
 
