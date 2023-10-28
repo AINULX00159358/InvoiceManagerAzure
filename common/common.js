@@ -19,7 +19,7 @@ const invoiceTemplate = {
        'paymentID': null,
        'status': null,
        'balance': null,
-       'startuplatency': null,
+       'latency': null,
        'history': {}
     };
 
@@ -45,7 +45,7 @@ function createCloudEventResponse(invoice){
 function createCloudEvent(invoice){
     return new CloudEvent({
        id: invoice.invoiceID || invoice.clientID,
-       type: type + "." + invoice.status,
+       type: invoice.status,
        source: source + "/" + invoice.status,
        data: updatetHistory(invoice),
        subject: "invoice-"+ ( invoice.status || "UNKNOWN" ),
@@ -58,7 +58,7 @@ function createJsonResponse(invoice){
      return {
             "specversion" : "1.0",
             "id" : uuidv4(),
-            "type" : type + "." + invoice.status,
+            "type" : invoice.status,
             "source" : source + "/" + invoice.status,
             "subject" : "invoice-"+ ( invoice.status || "UNKNOWN" ),
             "time" : new Date().toISOString(),
@@ -121,5 +121,17 @@ function calculateProcessingDelay(isoDateTime) {
    return Date.now() - Date.parse(isoDateTime)
 }
 
+function calculateLatency(maxLatency, isoDateTime) {
+    if (maxLatency == NaN || maxLatency == null) {
+       maxLatency = 0;
+    }   
+   
+    const currentLatency = (Date.now() - Date.parse(isoDateTime)); 
+    if (currentLatency > maxLatency) {
+       maxLatency = currentLatency;
+    }
+    return maxLatency;
+   }
+
  
-module.exports = { uptime, calculateProcessingDelay, newInvoice, register, payment, createCloudEventResponse, createJsonResponse, createJsonPayment, validate, createCloudEvent  }
+module.exports = { uptime, calculateLatency, calculateProcessingDelay, newInvoice, register, payment, createCloudEventResponse, createJsonResponse, createJsonPayment, validate, createCloudEvent  }
