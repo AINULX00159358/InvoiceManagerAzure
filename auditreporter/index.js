@@ -12,13 +12,5 @@ module.exports = async function (context, eventGridEvent) {
     maxLatency = latency;
   }
   context.log(eventGridEvent.data.invoiceID + ", Count="+counter + ", current="+ latency+ ", Max="+ maxLatency);
-
-  const responseEvent = { 
-      "invoiceID": eventGridEvent.data.invoiceID, 
-      "starting": starting, 
-      "ending": ending, 
-      "maxLatency": maxLatency
-    };
   
-  context.bindings.outputEvent = responseEvent;
 };

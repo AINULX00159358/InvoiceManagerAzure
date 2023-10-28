@@ -4,13 +4,6 @@
       "type": "eventGridTrigger",
       "name": "eventGridEvent",
       "direction": "in"
-    },
-    {
-      "type": "eventGrid",
-      "name": "outputEvent",
-      "topicEndpointUri": "InvoiceMgrEventGridTopicUri",
-      "topicKeySetting": "InvoiceMgrEventGridTopicKey",
-      "direction": "out"
     }
   ]
 }
