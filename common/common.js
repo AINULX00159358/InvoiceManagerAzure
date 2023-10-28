@@ -67,7 +67,7 @@ function createJsonResponse(invoice){
 }
 
 function createJsonPayment(invoice, amount){
-    invoice.status = "NEW-PAYMENT";
+    invoice.status = "PAID";
     invoice.datePaid = new Date().toISOString();
     invoice.amountPaid = amount;
      return {
