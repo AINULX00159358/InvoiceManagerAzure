@@ -1,17 +1,24 @@
 let maxLatency = 0
-let counter = 0
-let sumlatency = 0
+//let counter = 0
+//let sumlatency = 0
 
 
 module.exports = async function (context, eventGridEvent) {
-  counter = counter + 1;
+  //counter = counter + 1;
   let starting = eventGridEvent.data.history["invoice_NEW"];
   let ending = eventGridEvent.data.history["invoice_CLOSED"];
   let latency = ending - starting;
   if (latency > maxLatency) {
     maxLatency = latency;
   }
-  sumlatency = sumlatency + latency
-  let avgLatency = sumlatency / counter;
-  context.log(eventGridEvent.data.invoiceID + ", Count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
+  context.log(eventGridEvent.data.invoiceID + ", Count="+counter + ", current="+ latency+ ", Max="+ maxLatency);
+
+  const responseEvent = { 
+      "invoiceID": eventGridEvent.data.invoiceID, 
+      "starting": starting, 
+      "ending": ending, 
+      "maxLatency": maxLatency
+    };
+  
+  context.bindings.outputEvent = responseEvent;
 };
