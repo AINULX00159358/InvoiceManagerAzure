@@ -1,0 +1,1 @@
+az functionapp delete --resource-group MscResProj --name invoicemgrapp
