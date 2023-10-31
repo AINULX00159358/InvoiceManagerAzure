@@ -12,6 +12,23 @@ module.exports = async function (context, eventGridEvent) {
     maxLatency = latency;
   }
   sumlatency = sumlatency + latency
-  let avgLatency = sumlatency / counter;
+  const avgLatency = sumlatency / counter;
+  const latencyData = {
+    "average": avgLatency,
+    "current": latency,
+    "max": maxLatency
+  }
+  eventGridEvent.data.latency = latencyData;
   context.log("AUDIT: count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
+  responseEvent =   {
+    "specversion" : "1.0",
+    "id" : uuidv4(),
+    "type" : "AUDIT",
+    "source" : "auditreporter",
+    "subject" : "invoice-audit",
+    "time" : new Date().toISOString(),
+    "data" : eventGridEvent.data
+  };
+  context.bindings.outputEvent = responseEvent
+  
 };
