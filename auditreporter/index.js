@@ -13,14 +13,17 @@ module.exports = async function (context, eventGridEvent) {
   }
   sumlatency = sumlatency + latency
   const avgLatency = sumlatency / counter;
+  context.log("AUDIT: count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
+
+  /** 
   const latencyData = {
     "average": avgLatency,
     "current": latency,
     "max": maxLatency
   }
   eventGridEvent.data.latency = latencyData;
-  context.log("AUDIT: count="+counter, ", avgerage ="+ avgLatency+ ", current="+ latency+ ", Max="+ maxLatency);
-  responseEvent =   {
+ 
+  const responseEvent =   {
     "specversion" : "1.0",
     "id" : uuidv4(),
     "type" : "AUDIT",
@@ -30,5 +33,6 @@ module.exports = async function (context, eventGridEvent) {
     "data" : eventGridEvent.data
   };
   context.bindings.outputEvent = responseEvent
-  
+  */
+
 };
